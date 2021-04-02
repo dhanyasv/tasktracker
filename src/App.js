@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import Tasks from "./components/Tasks";
+import { useState } from 'react';
 
 function App() {
+  //Main Tasks 
+  const [tasks, setTasks] = useState([{
+    id : 1,
+    taskName : "Task1",
+    taskDate : "April 2 , 2 pm",
+    reminder : false
+  },
+  {
+    id : 2,
+    taskName : "Task2",
+    taskDate : "April 4 , 2 pm",
+    reminder : false
+  },
+  {
+    id : 3,
+    taskName : "Task3",
+    taskDate : "Sep 5 , 9pm",
+    reminder : true
+  },
+  {
+    id : 4,
+    taskName : "Task4",
+    taskDate : "April 2 , 2 pm",
+    reminder : false
+  }]);
+  //Add Button Click
+  const btnClick = (event) => {
+    console.log(event)
+  }
+  //Toggle task 
+
+  const toggleTask = (id) => {
+     console.log(id)
+     setTasks(tasks.map((task) => 
+       task.id === id ? {...task,reminder :
+      !task.reminder} : task 
+    ))
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header btnClick = {btnClick} />  
+      <Tasks tasks = {tasks} setTasks={setTasks} toggleTask={toggleTask}/>
     </div>
+    
   );
 }
-
 export default App;
